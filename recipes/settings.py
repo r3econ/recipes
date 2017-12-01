@@ -27,7 +27,7 @@ SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEST_RUNNER = 'gettingstarted.heroku_test_runner.HerokuDiscoverRunner'
+TEST_RUNNER = 'recipes.heroku_test_runner.HerokuDiscoverRunner'
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recipes_website',
+    'website',
     'rest_framework',
 )
 
@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'gettingstarted.urls'
+ROOT_URLCONF = 'recipes.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gettingstarted.wsgi.application'
+WSGI_APPLICATION = 'recipes.wsgi.application'
 
 
 # Database
