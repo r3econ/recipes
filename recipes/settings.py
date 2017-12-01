@@ -44,6 +44,20 @@ INSTALLED_APPS = (
     'api',
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'rest_framework.permissions.IsAuthenticated',
+    ],
+    # Pagination settings
+    'PAGE_SIZE': 20,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
+    'DEFAULT_VERSION': '1.0.0',
+    'ALLOWED_VERSIONS': [
+        '1.0.0', 
+    ],
+}
+
 MIDDLEWARE_CLASSES = (
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
