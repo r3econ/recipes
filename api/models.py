@@ -43,11 +43,11 @@ class Recipe(BaseModel):
     """
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, related_name='recipes')
-    preparation_time = models.IntegerField()
-    cooking_time = models.IntegerField()
-    serving_count = models.IntegerField()
+    preparation_time = models.IntegerField(null=True, help_text="Preparation time in minutes")
+    cooking_time = models.IntegerField(null=True, help_text="Cooking time in minutes")
+    serving_count = models.IntegerField(default=1)
 
 class PreparationStep(BaseModel):
     """
@@ -55,15 +55,15 @@ class PreparationStep(BaseModel):
     """
     step_number = models.IntegerField()
     description = models.TextField(null=False, blank=False)
-    recipe = models.ForeignKey(Recipe, related_name='preparation_steps')
+    recipe = models.ForeignKey(Recipe, related_name='preparation_steps', on_delete=models.CASCADE)
 
 class IngredientStep(BaseModel):
     """
     Ingredient step. Information about the amount
     of the ingredient in the recipe.
     """
-    recipe = models.ForeignKey(Recipe, related_name='ingredient_steps')
-    ingredient = models.ForeignKey(Ingredient)
+    recipe = models.ForeignKey(Recipe, related_name='ingredient_steps', on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.PROTECT)
     amount = models.FloatField()
     unit = models.CharField(max_length=45, null=True, blank=True)
 
