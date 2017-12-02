@@ -12,7 +12,7 @@ class BaseModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     modified_date = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-    class Meta:
+    class Meta: # pylint: disable=too-few-public-methods
         """
         Meta helper class
         """
@@ -24,8 +24,8 @@ class Category(BaseModel):
     """
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    
-    class Meta:
+
+    class Meta: # pylint: disable=too-few-public-methods
         """
         Meta helper class
         """
@@ -45,4 +45,32 @@ class Recipe(BaseModel):
     description = models.TextField(null=True, blank=True)
     author = models.ForeignKey(User)
     categories = models.ManyToManyField(Category, related_name='recipes')
-    ingredients = models.ManyToManyField(Ingredient, related_name='recipes')
+    preparation_time = models.IntegerField()
+    cooking_time = models.IntegerField()
+    serving_count = models.IntegerField()
+
+class PreparationStep(BaseModel):
+    """
+    Preparation step. Description what to do when cooking.
+    """
+    step_number = models.IntegerField()
+    description = models.TextField(null=False, blank=False)
+    recipe = models.ForeignKey(Recipe, related_name='preparation_steps')
+
+class IngredientStep(BaseModel):
+    """
+    Ingredient step. Information about the amount
+    of the ingredient in the recipe.
+    """
+    recipe = models.ForeignKey(Recipe, related_name='ingredient_steps')
+    ingredient = models.ForeignKey(Ingredient)
+    amount = models.FloatField()
+    unit = models.CharField(max_length=45, null=True, blank=True)
+
+class UserProfile(BaseModel):
+    """
+    User Profile extends the built-in User class adding
+    profile related fields.
+    """
+    user = models.OneToOneField(User)
+    bookmarked_recipes = models.ManyToManyField(Recipe, blank=True, related_name='bookmarked_by')
