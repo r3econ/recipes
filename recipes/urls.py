@@ -19,6 +19,7 @@ urlpatterns = [
     # Restful API
     # Following urls define the api
     url(r'^api/categories/$', api.views.CategoryListView.as_view(), name='category-list'),
+    url(r'^api/categories/(?P<category_id>\d+)/recipes/$', api.views.CategoryRecipeListView.as_view(), name='category-recipes-list'),
     url(r'^api/recipes/$', api.views.RecipeListView.as_view(), name='recipe-list'),
     url(r'^api/recipes/(?P<pk>\d+)/$', api.views.RecipeDetailView.as_view(), name='recipe-detail'),
 ]
