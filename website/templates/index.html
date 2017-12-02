@@ -3,19 +3,34 @@
 
 {% block content %}
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="burger-logo">
-      <img src="{% static 'logo.png'%}">
-    </a>
-    <h1>Recipes</h1>
-    <p>Because only the pure in heart can make a good soup.</p>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/r3econ/recipes"><span class="glyphicon glyphicon-download"></span> Coming soon!</a>
-  </div>
-</div>
 <div class="container">
-   <div class="alert alert-info text-center" role="alert">
-    Please be patient, the website is under heavy development.  
+  <div class="page-header">
+      <h1>
+        Food recipes
+        <small>Yes!</small>
+      </h1>  
   </div>
+
+  <div class="container">
+    <div id="recipes" class="list-group">
+      {% for recipe in recipes %}
+      <div class="item  col-xs-4 col-lg-4">
+          <div class="thumbnail">
+              <img class="group list-group-image" src="http://lorempixel.com/400/250/food/" alt="" />
+              <div class="caption">
+                  <h4 class="group inner list-group-item-heading">
+                      {{ recipe.title }}
+                  </h4>
+                  <p class="group inner list-group-item-text">
+                      {{ recipe.description }}
+                  </p>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
 </div>
+
 {% endblock %}

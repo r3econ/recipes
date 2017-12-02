@@ -8,7 +8,8 @@ def index(request):
     """
     Home page
     """
-    return render(request, 'index.html')
+    recipes = models.Recipe.objects.all()
+    return render(request, 'index.html', {'recipes': recipes})
 
 def recipes(request):
     """
