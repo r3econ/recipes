@@ -56,7 +56,7 @@ class RecipeTests(APITestCase):
         # Create users
         self.user = User.objects.create_user(username='user', password='qwerty')
 
-        # Create categories
+        # Create recipes
         self.recipe_count = 10
         for i in range(0, self.recipe_count):
             models.Recipe.objects.create(
@@ -86,3 +86,60 @@ class RecipeTests(APITestCase):
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['results']), self.recipe_count)
+
+class RecipeBookmarkingTests(APITestCase):
+    """
+    Recipe related tests
+    """
+
+    def setUp(self):
+        """
+        Pre-configures testing environment
+        """
+        # Create users
+        self.user = User.objects.create_user(username='user', password='qwerty')
+
+        # Create recipes
+        self.recipe = models.Recipe.objects.create(
+                author=self.user,
+                title='Recipe #1',
+                description='Test description',
+                preparation_time=10,
+                cooking_time=20,
+                serving_count=5)
+        self.recipe.save()
+
+        # Check the test data
+        self.assertEqual(models.Recipe.objects.count(), 1)
+        self.assertEqual(User.objects.count(), 1)
+        self.assertEqual(self.user.user_profile.bookmarked_recipes.count(), 0)
+
+    def test_bookmarking_a_recipe(self):
+        """
+        Tests bookmarking a recipe
+        """
+        # Authenticate the user
+        self.client.force_authenticate(user=self.user)
+
+        # Run the request
+        url = reverse('recipe-bookmark', kwargs={'recipe_id': self.recipe.id, })
+        response = self.client.post(url)
+
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(self.user.user_profile.bookmarked_recipes.count(), 1)
+
+    def test_unbookmarking_a_recipe(self):
+        """
+        Tests undoing bookmarking a recipe
+        """
+        # Bookmark the recipe
+        self.test_bookmarking_a_recipe()
+
+        # Run the request
+        url = reverse('recipe-unbookmark', kwargs={'recipe_id': self.recipe.id, })
+        response = self.client.post(url)
+
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(self.user.user_profile.bookmarked_recipes.count(), 0)
