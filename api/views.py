@@ -2,6 +2,9 @@
 View classes
 """
 from rest_framework import generics
+from rest_framework import exceptions
+from rest_framework import status
+from rest_framework.views import APIView
 from api import models
 from api import serializers
 
@@ -48,3 +51,22 @@ class RecipeDetailView(generics.RetrieveAPIView):
     """
     queryset = models.Recipe.objects.all()
     serializer_class = serializers.RecipeDetailSerializer
+
+class RecipeBookmarkView(APIView):
+    """
+    post: Bookmarks the recipe
+    """
+    def post(self, request, *args, **kwargs):
+        # Get the recipe
+        try:
+            recipe = models.Recipe.objects.get(id=self.kwargs.get('recipe_id'))
+        except models.Recipe.DoesNotExist:
+            raise exceptions.NotFound('Recipe not found.')
+
+        if request.user.user_profile.bookmarked_recipes.filter(id=recipe.id).exists():
+            # User already bookmarked
+            return Response('Recipe already bookmarked', status=status.HTTP_409_CONFLICT)
+        else:
+            # Bookmark the recipe
+            request.user.user_profile.bookmarked_recipes.add(recipe)
+            return Response(status=status.HTTP_200_OK)

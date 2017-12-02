@@ -2,7 +2,20 @@
 Serializer classes
 """
 from rest_framework import serializers
+from django.contrib.auth import models as auth_models
 from api import models
+
+class UserGistSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping User object into detailed representation
+    """
+
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
+        model = auth_models.User
+        fields = ('id', 'username')
 
 class CategorySerializer(serializers.ModelSerializer):
     """
@@ -70,6 +83,7 @@ class RecipeDetailSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     ingredient_steps = IngredientStepSerializer(many=True)
     preparation_steps = PreparationStepSerializer(many=True)
+    author = UserGistSerializer()
 
     class Meta: # pylint: disable=too-few-public-methods
         """
@@ -77,6 +91,7 @@ class RecipeDetailSerializer(serializers.ModelSerializer):
         """
         model = models.Recipe
         fields = ('id',
+                  'author',
                   'title',
                   'created_date',
                   'description',
@@ -86,3 +101,18 @@ class RecipeDetailSerializer(serializers.ModelSerializer):
                   'categories',
                   'ingredient_steps',
                   'preparation_steps')
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping User object into detailed representation
+    """
+    bookmarked_recipes = RecipeGistSerializer(source='user_profile.bookmarked_recipes', many=True)
+
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
+        model = auth_models.User
+        fields = ('id',
+                  'username', 
+                  'bookmarked_recipes')
