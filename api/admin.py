@@ -4,6 +4,15 @@ Admin interface
 from django.contrib import admin
 from api import models
 
+class UserProfileAdmin(admin.ModelAdmin):
+    """
+    UserProfile admin interface
+    """
+    fields = ['id', 'bookmarked_recipes', 'user']
+    readonly_fields = ['id']
+    list_display = ['id', 'user']
+    search_fields = ['id']
+
 class IngredientAdmin(admin.ModelAdmin):
     """
     Ingredient admin interface
@@ -56,3 +65,4 @@ admin.site.register(models.Ingredient, IngredientAdmin)
 admin.site.register(models.IngredientStep, IngredientStepAdmin)
 admin.site.register(models.PreparationStep, PreparationStepAdmin)
 admin.site.register(models.Recipe, RecipeAdmin)
+admin.site.register(models.UserProfile, UserProfileAdmin)
