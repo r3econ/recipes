@@ -1,41 +1,88 @@
 """
 Serializer classes
 """
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from api import models
-from api import serializers
 
-class CategorySerializer(ModelSerializer):
-
-    class Meta:
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping Category objects
+    """
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
         model = models.Category
-        fields = ('id', 'name', 'description', 'created_date')
+        fields = ('id', 'name', 'description')
 
-class IngredientSerializer(ModelSerializer):
-
-    class Meta:
+class IngredientSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping Ingredient objects
+    """
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
         model = models.Ingredient
-        fields = ('id', 'name', 'created_date')
+        fields = ('id', 'name')
 
-class RecipeGistSerializer(ModelSerializer):
+class IngredientStepSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping IngredientStep objects
+    """
+    ingredient = IngredientSerializer()
 
-    class Meta:
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
+        model = models.IngredientStep
+        fields = ('id', 'amount', 'unit', 'ingredient')
+
+class PreparationStepSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping PreparationStep objects
+    """
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
+        model = models.PreparationStep
+        fields = ('id', 'step_number', 'description')
+
+class RecipeGistSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping Recipe objects into small (gist) representations
+    """
+    categories = CategorySerializer()
+
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
+        model = models.Recipe
+        fields = ('id', 'title', 'created_date', 'categories')
+
+class RecipeDetailSerializer(serializers.ModelSerializer):
+    """
+    Serializer mapping Recipe objects into detailed representations
+    """
+    categories = CategorySerializer(many=True)
+    ingredient_steps = IngredientStepSerializer(many=True)
+    preparation_steps = PreparationStepSerializer(many=True)
+
+    class Meta: # pylint: disable=too-few-public-methods
+        """
+        Meta helper class
+        """
         model = models.Recipe
         fields = ('id',
                   'title',
+                  'created_date',
                   'description',
-                  'created_date')
-
-class RecipeDetailSerializer(ModelSerializer):
-
-    categories = serializers.CategorySerializer(many=True)
-    ingredients = serializers.IngredientSerializer(many=True)
-
-    class Meta:
-        model = models.Recipe
-        fields = ('id',
-                  'title',
-                  'description',
+                  'preparation_time',
+                  'cooking_time',
+                  'serving_count',
                   'categories',
-                  'ingredients',
-                  'created_date')
+                  'ingredient_steps',
+                  'preparation_steps')
