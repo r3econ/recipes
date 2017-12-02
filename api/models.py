@@ -25,6 +25,12 @@ class Category(BaseModel):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'Category #{}: {}'.format(self.id, self.name)
+
     class Meta: # pylint: disable=too-few-public-methods
         """
         Meta helper class
@@ -36,6 +42,12 @@ class Ingredient(BaseModel):
     Recipe ingredient
     """
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'Ingredient #{}: {}'.format(self.id, self.name)
 
 class Recipe(BaseModel):
     """
@@ -49,6 +61,12 @@ class Recipe(BaseModel):
     cooking_time = models.IntegerField(null=True, help_text="Cooking time in minutes")
     serving_count = models.IntegerField(default=1)
 
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'Recipe #{}: {}'.format(self.id, self.title)
+
 class PreparationStep(BaseModel):
     """
     Preparation step. Description what to do when cooking.
@@ -56,6 +74,12 @@ class PreparationStep(BaseModel):
     step_number = models.IntegerField()
     description = models.TextField(null=False, blank=False)
     recipe = models.ForeignKey(Recipe, related_name='preparation_steps', on_delete=models.CASCADE)
+
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'PreparationStep #{}: {}. - {}'.format(self.id, self.step_number, self.description)
 
 class IngredientStep(BaseModel):
     """
@@ -67,6 +91,12 @@ class IngredientStep(BaseModel):
     amount = models.FloatField()
     unit = models.CharField(max_length=45, null=True, blank=True)
 
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'IngredientStep #{}: {} - {} {}'.format(self.id, self.ingredient, self.amount, self.unit)
+
 class UserProfile(BaseModel):
     """
     User Profile extends the built-in User class adding
@@ -74,3 +104,9 @@ class UserProfile(BaseModel):
     """
     user = models.OneToOneField(User)
     bookmarked_recipes = models.ManyToManyField(Recipe, blank=True, related_name='bookmarked_by')
+
+    def __str__(self):
+        """
+        Informal string representation of the instance
+        """
+        return 'UserProfile #{}: User({}, {})'.format(self.id, self.user.id, self.user.username)

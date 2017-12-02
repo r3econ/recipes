@@ -54,7 +54,7 @@ class RecipeGistSerializer(serializers.ModelSerializer):
     """
     Serializer mapping Recipe objects into small (gist) representations
     """
-    categories = CategorySerializer()
+    categories = CategorySerializer(many=True)
 
     class Meta: # pylint: disable=too-few-public-methods
         """

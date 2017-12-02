@@ -13,6 +13,24 @@ class IngredientAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
     search_fields = ['name']
 
+class IngredientStepAdmin(admin.ModelAdmin):
+    """
+    IngredientStep admin interface
+    """
+    fields = ['id', 'ingredient', 'amount', 'unit', 'recipe']
+    readonly_fields = ['id']
+    list_display = ['id', 'ingredient', 'amount', 'unit']
+    search_fields = ['id']
+
+class PreparationStepAdmin(admin.ModelAdmin):
+    """
+    PreparationStep admin interface
+    """
+    fields = ['id', 'step_number', 'description', 'recipe']
+    readonly_fields = ['id']
+    list_display = ['id', 'step_number', 'description', 'recipe']
+    search_fields = ['id']
+
 class CategoryAdmin(admin.ModelAdmin):
     """
     Category admin interface
@@ -27,7 +45,7 @@ class RecipeAdmin(admin.ModelAdmin):
     Recipe admin interface
     """
     fields = ['id', 'title', 'description', 'author', 'cooking_time',
-              'preparation_time', 'serving_count']
+              'preparation_time', 'serving_count', 'categories']
     readonly_fields = ['id']
     list_display = ['title', 'author', 'id']
     search_fields = ['title', 'description']
@@ -35,4 +53,6 @@ class RecipeAdmin(admin.ModelAdmin):
 # Register admin interfaces
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Ingredient, IngredientAdmin)
+admin.site.register(models.IngredientStep, IngredientStepAdmin)
+admin.site.register(models.PreparationStep, PreparationStepAdmin)
 admin.site.register(models.Recipe, RecipeAdmin)
