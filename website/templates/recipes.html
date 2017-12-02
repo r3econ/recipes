@@ -4,14 +4,12 @@
 {% block content %}
   <div class="container">
 
-
-<h2>Page View Report</h2>
-
+<h2>Recipes</h2>
 
 <ul>
 
-{% for greeting in greetings %}
-    <li>{{ greeting.when }}</li>
+{% for recipe in recipes %}
+    <li>{{ recipe.title }}</li>
 {% endfor %}
 
 </ul>

@@ -1,20 +1,18 @@
+"""
+Website views
+"""
 from django.shortcuts import render
-from django.http import HttpResponse
+from api import models
 
-from .models import Greeting
-
-# Create your views here.
 def index(request):
-    # return HttpResponse('Hello from Python!')
+    """
+    Home page
+    """
     return render(request, 'index.html')
 
-
-def db(request):
-
-    greeting = Greeting()
-    greeting.save()
-
-    greetings = Greeting.objects.all()
-
-    return render(request, 'db.html', {'greetings': greetings})
-
+def recipes(request):
+    """
+    Recipe list
+    """
+    recipes = models.Recipe.objects.all()
+    return render(request, 'recipes.html', {'recipes': recipes})
