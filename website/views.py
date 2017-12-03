@@ -9,14 +9,11 @@ def index(request):
     Home page
     """
     recipes = models.Recipe.objects.all()
-    categories = models.Category.objects.all()
+    return render(request, 'index.html', {'recipes': recipes})
 
-    return render(request, 'index.html', {'recipes': recipes, 'categories': categories})
-
-def recipes(request):
+def recipe(request, recipe_id):
     """
     Recipe list
     """
-    recipes = models.Recipe.objects.all()
-    categories = models.Category.objects.all()
-    return render(request, 'recipes.html', {'recipes': recipes, 'categories': categories})
+    recipe = models.Recipe.objects.get(id=recipe_id)
+    return render(request, 'recipe.html', {'recipe': recipe})

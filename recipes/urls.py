@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # Website urls
     url(r'^$', website.views.index, name='index'),
-    url(r'^recipes', website.views.recipes, name='recipes'),
+    url(r'^recipes/(?P<recipe_id>[0-9]+)/$', website.views.recipe, name='recipe'),
+
     # Restful API
     # Following urls define the api
     url(r'^api/categories/$', api.views.CategoryListView.as_view(), name='category-list'),
