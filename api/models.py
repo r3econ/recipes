@@ -38,18 +38,6 @@ class Category(BaseModel):
         """
         verbose_name_plural = "categories"
 
-class Ingredient(BaseModel):
-    """
-    Recipe ingredient
-    """
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        """
-        Informal string representation of the instance
-        """
-        return 'Ingredient #{}: {}'.format(self.id, self.name)
-
 class Recipe(BaseModel):
     """
     Recipe
@@ -61,42 +49,14 @@ class Recipe(BaseModel):
     preparation_time = models.IntegerField(null=True, help_text="Preparation time in minutes")
     cooking_time = models.IntegerField(null=True, help_text="Cooking time in minutes")
     serving_count = models.IntegerField(default=1)
+    preparation_info = models.TextField(null=False, blank=False, help_text="Detailed description of what to do to cook the recipe.")
+    ingredient_info = models.TextField(null=False, blank=False, help_text="Info about what ingredients are required in order to cook the recipe.")
 
     def __str__(self):
         """
         Informal string representation of the instance
         """
         return 'Recipe #{}: {}'.format(self.id, self.title)
-
-class PreparationStep(BaseModel):
-    """
-    Preparation step. Description what to do when cooking.
-    """
-    step_number = models.IntegerField()
-    description = models.TextField(null=False, blank=False)
-    recipe = models.ForeignKey(Recipe, related_name='preparation_steps', on_delete=models.CASCADE)
-
-    def __str__(self):
-        """
-        Informal string representation of the instance
-        """
-        return 'PreparationStep #{}: {}. - {}'.format(self.id, self.step_number, self.description)
-
-class IngredientStep(BaseModel):
-    """
-    Ingredient step. Information about the amount
-    of the ingredient in the recipe.
-    """
-    recipe = models.ForeignKey(Recipe, related_name='ingredient_steps', on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.PROTECT)
-    amount = models.FloatField()
-    unit = models.CharField(max_length=45, null=True, blank=True)
-
-    def __str__(self):
-        """
-        Informal string representation of the instance
-        """
-        return 'IngredientStep #{}: {} - {} {}'.format(self.id, self.ingredient, self.amount, self.unit)
 
 class UserProfile(BaseModel):
     """

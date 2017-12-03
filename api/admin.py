@@ -61,8 +61,5 @@ class RecipeAdmin(admin.ModelAdmin):
 
 # Register admin interfaces
 admin.site.register(models.Category, CategoryAdmin)
-admin.site.register(models.Ingredient, IngredientAdmin)
-admin.site.register(models.IngredientStep, IngredientStepAdmin)
-admin.site.register(models.PreparationStep, PreparationStepAdmin)
 admin.site.register(models.Recipe, RecipeAdmin)
 admin.site.register(models.UserProfile, UserProfileAdmin)
