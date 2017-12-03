@@ -13,19 +13,24 @@
 
 <style type="text/css">
     body {
-        padding-top: 54px;
+        padding-top: 20px;
     }
     @media (min-width: 992px) {
         body {
-            padding-top: 56px;
+            padding-top: 20px;
         }
     }
     
 </style>
 </head>
 <body>
+    {% block content %}{% endblock %}
 
-{% block content %}{% endblock %}
-
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+    </footer>
 </body>
 </html>
