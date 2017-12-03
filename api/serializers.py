@@ -68,13 +68,21 @@ class RecipeGistSerializer(serializers.ModelSerializer):
     Serializer mapping Recipe objects into small (gist) representations
     """
     categories = CategorySerializer(many=True)
+    excerpt = serializers.SerializerMethodField()
 
     class Meta: # pylint: disable=too-few-public-methods
         """
         Meta helper class
         """
         model = models.Recipe
-        fields = ('id', 'title', 'created_date', 'categories')
+        fields = ('id', 'title', 'created_date', 'categories', 'excerpt')
+
+    def get_excerpt(self, obj):
+        max_length = 100
+        if len(obj.description) <= max_length:
+            return obj.description
+        else:
+            return obj.description[:max_length].rsplit(' ', 1)[0] + '...'
 
 class RecipeDetailSerializer(serializers.ModelSerializer):
     """
