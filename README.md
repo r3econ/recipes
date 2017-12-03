@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/r3econ/recipes.svg?branch=master)](https://travis-ci.org/r3econ/recipes)
+
 # Recipes
 
 Backend API serving food recipes. Built with Python and Django.

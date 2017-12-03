@@ -3,4 +3,6 @@ python:
   - 3.6
 script:
     - python manage.py test
-    - codecov
+after_success:
+ +  - pip install codecov
+ +  - codecov
