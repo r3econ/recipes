@@ -1,13 +1,16 @@
 [![Build Status](https://travis-ci.org/r3econ/recipes.svg?branch=master)](https://travis-ci.org/r3econ/recipes)
+[![CodeFactor](https://www.codefactor.io/repository/github/r3econ/recipes/badge)](https://www.codefactor.io/repository/github/r3econ/recipes)
 
 # Recipes
 
-Backend API serving food recipes. Built with Python and Django.
-An example of a complex backend app serving restful api and a website.
+Backend API serving food recipes. Built with Python and [Django Rest Framework](http://www.django-rest-framework.org/).
+An example of a backend django app serving restful API.
 
 ## What's included
-- Restful backend api
+- Restful backend API
 - Simple website showing food recipes
+- Swagger schema
+- Admin database interface
 
 ## Running locally
 
