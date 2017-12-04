@@ -66,10 +66,10 @@ class RecipeBookmarkView(APIView):
         if request.user.user_profile.bookmarked_recipes.filter(id=recipe.id).exists():
             # User already bookmarked
             return Response('Recipe already bookmarked', status=status.HTTP_409_CONFLICT)
-        else:
-            # Bookmark the recipe
-            request.user.user_profile.bookmarked_recipes.add(recipe)
-            return Response(status=status.HTTP_200_OK)
+        
+        # Bookmark the recipe
+        request.user.user_profile.bookmarked_recipes.add(recipe)
+        return Response(status=status.HTTP_200_OK)
 
 class RecipeUnbookmarkView(APIView):
     """
@@ -92,6 +92,6 @@ class RecipeUnbookmarkView(APIView):
             # Remove recipe from bookmarks
             request.user.user_profile.bookmarked_recipes.remove(recipe)
             return Response(status=status.HTTP_200_OK)
-        else:
-            # User is not following this entry
-            return Response("Recipe not bookmarked. Can't unbookmark.", status=status.HTTP_409_CONFLICT)
+        
+        # User is not following this entry
+        return Response("Recipe not bookmarked. Can't unbookmark.", status=status.HTTP_409_CONFLICT)
