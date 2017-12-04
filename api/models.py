@@ -80,3 +80,4 @@ class UserProfile(BaseModel):
             UserProfile.objects.create(user=instance)
 
     post_save.connect(create_user_profile, sender=User)
+    
