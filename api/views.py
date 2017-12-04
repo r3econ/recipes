@@ -1,5 +1,5 @@
 """
-View classes
+Views
 """
 from rest_framework import generics
 from rest_framework import exceptions
@@ -12,21 +12,21 @@ from api import serializers
 
 class CategoryListView(generics.ListAPIView):
     """
-    API endpoint that allows categories to be viewed.
+    Returns list of categories
     """
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
 
 class RecipeListView(generics.ListAPIView):
     """
-    API endpoint that allows recipes to be viewed.
+    Returns a list of recipes
     """
     queryset = models.Recipe.objects.all()
     serializer_class = serializers.RecipeGistSerializer
 
 class CategoryRecipeListView(generics.ListAPIView):
     """
-    API endpoint that returns recipes of a given category.
+    Returns recipes of a given category
     """
     serializer_class = serializers.RecipeGistSerializer
 
@@ -42,7 +42,7 @@ class CategoryRecipeListView(generics.ListAPIView):
 
 class RecipeDetailView(generics.RetrieveAPIView):
     """
-    API endpoint that allows a recipe to be viewed.
+    Returns recipe details
     """
     queryset = models.Recipe.objects.all()
     serializer_class = serializers.RecipeDetailSerializer
@@ -66,7 +66,7 @@ class RecipeBookmarkView(APIView):
         if request.user.user_profile.bookmarked_recipes.filter(id=recipe.id).exists():
             # User already bookmarked
             return Response('Recipe already bookmarked', status=status.HTTP_409_CONFLICT)
-        
+
         # Bookmark the recipe
         request.user.user_profile.bookmarked_recipes.add(recipe)
         return Response(status=status.HTTP_200_OK)
@@ -92,6 +92,6 @@ class RecipeUnbookmarkView(APIView):
             # Remove recipe from bookmarks
             request.user.user_profile.bookmarked_recipes.remove(recipe)
             return Response(status=status.HTTP_200_OK)
-        
+
         # User is not following this entry
         return Response("Recipe not bookmarked. Can't unbookmark.", status=status.HTTP_409_CONFLICT)
