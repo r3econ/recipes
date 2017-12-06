@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework import exceptions
 from rest_framework import permissions
 from rest_framework import status
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from api import models
@@ -17,19 +18,25 @@ class CategoryListView(generics.ListAPIView):
     """
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', )
 
-class RecipeListView(generics.ListAPIView):
+class RecipeListView(generics.ListCreateAPIView):
     """
     Returns a list of recipes
     """
     queryset = models.Recipe.objects.all()
     serializer_class = serializers.RecipeGistSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title', 'description')
 
 class CategoryRecipeListView(generics.ListAPIView):
     """
     Returns recipes of a given category
     """
     serializer_class = serializers.RecipeGistSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title', 'description')
 
     def get_queryset(self):
         """

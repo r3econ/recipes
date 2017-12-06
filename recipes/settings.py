@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework_swagger',
     'rest_framework',
+    'django_filters',
     'website',
     'api',
 )
@@ -49,11 +50,28 @@ REST_FRAMEWORK = {
     # Pagination settings
     'PAGE_SIZE': 20,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # Versioning
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
     'DEFAULT_VERSION': '1.0.0',
     'ALLOWED_VERSIONS': [
         '1.0.0',
     ],
+    # Filter backends
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
+
+SWAGGER_SETTINGS = {
+    # Enable token based authentication
+    "USE_SESSION_AUTH": False,
+    'SECURITY_DEFINITIONS': {
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+    },
+    'DOC_EXPANSION': 'list',
+    'SHOW_REQUEST_HEADERS': True,
 }
 
 MIDDLEWARE_CLASSES = (
