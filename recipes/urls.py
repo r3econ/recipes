@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^api/recipes/(?P<pk>\d+)/$', api.views.RecipeDetailView.as_view(), name='recipe-detail'),
     url(r'^api/recipes/(?P<recipe_id>\d+)/bookmark/$', api.views.RecipeBookmarkView.as_view(), name='recipe-bookmark'),
     url(r'^api/recipes/(?P<recipe_id>\d+)/bookmark/undo$', api.views.RecipeUnbookmarkView.as_view(), name='recipe-unbookmark'),
+    url(r'^api/users/$', api.views.UserListView.as_view(), name='user-list'),
+
 ]

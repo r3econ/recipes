@@ -1,6 +1,7 @@
 """
 Views
 """
+from django.contrib.auth import models as auth_models
 from rest_framework import generics
 from rest_framework import exceptions
 from rest_framework import permissions
@@ -107,3 +108,12 @@ class RecipeUnbookmarkView(APIView):
 
         # User is not following this entry
         return Response("Recipe not bookmarked. Can't unbookmark.", status=status.HTTP_409_CONFLICT)
+
+class UserListView(generics.ListAPIView):
+    """
+    Returns list of users
+    """
+    queryset = auth_models.User.objects.all()
+    serializer_class = serializers.UserGistSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('username', 'first_name', "last_name" )
