@@ -56,8 +56,6 @@ REST_FRAMEWORK = {
     'ALLOWED_VERSIONS': [
         '1.0.0',
     ],
-    # Filter backends
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 SWAGGER_SETTINGS = {
