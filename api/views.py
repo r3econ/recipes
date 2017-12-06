@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api import models
 from api import serializers
+import api.permissions
 
 class CategoryListView(generics.ListAPIView):
     """
@@ -40,12 +41,16 @@ class CategoryRecipeListView(generics.ListAPIView):
             raise exceptions.NotFound('Category not found.')
         return models.Recipe.objects.filter(categories=category)
 
-class RecipeDetailView(generics.RetrieveAPIView):
+class RecipeDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Returns recipe details
+    get: Returns recipe details
+    patch: Updates recipe details
+    put: Replaces the recipe
+    delete: Deletes the recipe
     """
     queryset = models.Recipe.objects.all()
     serializer_class = serializers.RecipeDetailSerializer
+    permission_classes = (api.permissions.IsAuthorOrReadOnly, )
 
 class RecipeBookmarkView(APIView):
     """
