@@ -11,7 +11,7 @@ admin.autodiscover()
 
 urlpatterns = [
     # Admin interface
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     # Website urls
     url(r'^$', website.views.index, name='index'),
     url(r'^recipes/(?P<recipe_id>[0-9]+)/$', website.views.recipe, name='recipe'),
