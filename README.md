@@ -46,15 +46,31 @@ I'm working on adding the following features:
 
 Make sure you have Python 3 [installed properly](http://install.python-guide.org).  Also, install [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
+Clone the repo
 ```sh
 $ git clone git@github.com:r3econ/recipes.git
 $ cd recipes
+```
 
+Create virtual environment with Python 3 and activate it
+```
+virtualenv -p python3 env
+. ./env/bin/activate
+```
+
+Install dependencies
+```
 $ pip install -r requirements.txt
+```
 
+Prepare the database
+```
 $ python manage.py migrate
 $ python manage.py collectstatic
+```
 
+Start the development server
+```
 $ python manage.py runserver
 ```
 
