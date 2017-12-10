@@ -8,18 +8,43 @@ Backend API serving food recipes. Built with Python and [Django Rest Framework](
 An example of a backend django app serving restful API.
 
 <p align="center">
-<a href="https://imgur.com/HFXsi8S"><img src="https://i.imgur.com/HFXsi8S.png" title="source: imgur.com" /></a>
+<a href="https://i.imgur.com/Ninptgs.png"><img src="https://i.imgur.com/Ninptgs.png" title="Image" /></a>
 </p>
 
-## What's included
-- Restful backend API
-- Simple website showing food recipes
-- Swagger schema
+## But what's there?
+- Token authentication (sign up, login, logout)
+- Custom permissions (e.g. only author of the recipe can modify it)
+- Searching and filtering (e.g. searching for recipes by title, description)
+- User profiles
+- Recipes can be bookmarked
+
+### Extras
+- Simple website showing food recipes built using [Bootstrap](https://getbootstrap.com/)
+- Swagger schema ([What's Swagger?](https://swagger.io/))
 - Admin database interface
+
+## Live demo
+
+Working demo is deployed to heroku and you can check it out here:
+- [API root](https://hidden-eyrie-76546.herokuapp.com/api/) shows all the endpoints using Swagger
+- [Simple website](https://hidden-eyrie-76546.herokuapp.com/)
+- [Admin interface](https://hidden-eyrie-76546.herokuapp.com/admin/)
+
+Authenticate with a demo user:
+```
+username: bob
+password: bob123bob
+```
+
+## Upcoming
+I'm working on adding the following features:
+- Image upload for recipe images and user profile pictures
+- Simple webpage showing recipe details
+- Increasing test coverage
 
 ## Running locally
 
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+Make sure you have Python 3 [installed properly](http://install.python-guide.org).  Also, install [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
 ```sh
 $ git clone git@github.com:r3econ/recipes.git
