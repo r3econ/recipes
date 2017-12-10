@@ -13,33 +13,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['id', 'user']
     search_fields = ['id']
 
-class IngredientAdmin(admin.ModelAdmin):
-    """
-    Ingredient admin interface
-    """
-    fields = ['id', 'name']
-    readonly_fields = ['id']
-    list_display = ['name', 'id']
-    search_fields = ['name']
-
-class IngredientStepAdmin(admin.ModelAdmin):
-    """
-    IngredientStep admin interface
-    """
-    fields = ['id', 'ingredient', 'amount', 'unit', 'recipe']
-    readonly_fields = ['id']
-    list_display = ['id', 'ingredient', 'amount', 'unit']
-    search_fields = ['id']
-
-class PreparationStepAdmin(admin.ModelAdmin):
-    """
-    PreparationStep admin interface
-    """
-    fields = ['id', 'step_number', 'description', 'recipe']
-    readonly_fields = ['id']
-    list_display = ['id', 'step_number', 'description', 'recipe']
-    search_fields = ['id']
-
 class CategoryAdmin(admin.ModelAdmin):
     """
     Category admin interface
@@ -54,7 +27,8 @@ class RecipeAdmin(admin.ModelAdmin):
     Recipe admin interface
     """
     fields = ['id', 'title', 'description', 'author', 'cooking_time',
-              'preparation_time', 'serving_count', 'categories']
+              'preparation_time', 'serving_count', 'categories', 
+              'preparation_info', 'ingredient_info']
     readonly_fields = ['id']
     list_display = ['title', 'author', 'id']
     search_fields = ['title', 'description']
