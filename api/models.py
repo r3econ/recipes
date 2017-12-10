@@ -63,7 +63,7 @@ class UserProfile(BaseModel):
     User Profile extends the built-in User class adding
     profile related fields.
     """
-    user = models.OneToOneField(User, related_name='user_profile')
+    user = models.OneToOneField(User, related_name='user_profile', on_delete=models.CASCADE)
     bookmarked_recipes = models.ManyToManyField(Recipe, blank=True, related_name='bookmarked_by')
 
     def __str__(self):
