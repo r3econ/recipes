@@ -66,7 +66,6 @@ $ pip install -r requirements.txt
 Prepare the database
 ```
 $ python manage.py migrate
-$ python manage.py collectstatic
 ```
 
 Start the development server
