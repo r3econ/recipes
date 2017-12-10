@@ -6,6 +6,7 @@ from django.contrib import admin
 import website.views
 import api.views
 from rest_framework_swagger.views import get_swagger_view
+from djoser import views as auth_views
 
 admin.autodiscover()
 
@@ -27,4 +28,8 @@ urlpatterns = [
     url(r'^api/recipes/(?P<recipe_id>\d+)/bookmark/undo$', api.views.RecipeUnbookmarkView.as_view(), name='recipe-unbookmark'),
     # Users
     url(r'^api/users/$', api.views.UserListView.as_view(), name='user-list'),
+    # Authentication
+    url(r'^api/auth/register/$', auth_views.UserCreateView.as_view()),
+    url(r'^api/auth/login/$', auth_views.TokenCreateView.as_view()),
+    url(r'^api/auth/logout/$', auth_views.TokenDestroyView.as_view()),
 ]

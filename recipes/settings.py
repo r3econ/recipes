@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework_swagger',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     'django_filters',
     'website',
     'api',
@@ -56,6 +58,10 @@ REST_FRAMEWORK = {
     'ALLOWED_VERSIONS': [
         '1.0.0',
     ],
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
 SWAGGER_SETTINGS = {
