@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/r3econ/recipes.svg?branch=master)](https://travis-ci.org/r3econ/recipes)
 [![CodeFactor](https://www.codefactor.io/repository/github/r3econ/recipes/badge)](https://www.codefactor.io/repository/github/r3econ/recipes)
 [![Python](https://img.shields.io/badge/python-3.6-blue.svg)](https://img.shields.io/badge/python-3.6-blue.svg)
+[![saythanks.io](https://img.shields.io/badge/saythanks.io-now-1EAEDB.svg)](https://saythanks.io/to/r3econ)
 
 # Recipes
 
