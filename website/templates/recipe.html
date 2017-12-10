@@ -14,16 +14,36 @@
       <!-- Preview Image -->
       <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
       <hr>
-        <!-- Post Content -->
+        <!-- Recipe description -->
         <p class="lead">{{ recipe.description }}</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-        <blockquote class="blockquote">
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">Someone famous in
-              <cite title="Source Title">Source Title</cite>
-            </footer>
-        </blockquote>        
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+
+        <!-- Serving count, cooking time etc -->        
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Servings</th>
+              <th>Prep time</th>
+              <th>Cooking time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ recipe.serving_count }}</td>
+              <td>{{ recipe.preparation_time }}</td>
+              <td>{{ recipe.cooking_time }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- Ingredients -->
+        <h4 class="my-4">Ingredients</h4>
+        <p>{{ recipe.ingredient_info }}</p>
+
+        <!-- Preparation -->
+        <h4 class="my-4">Preparation</h4>
+        <p>{{ recipe.preparation_info }}</p>
+      
   </div>
                       
 </div>
